@@ -9,7 +9,6 @@ const router = express.Router();
 router.post("/text", async (req, res) => {
   try {
     const { text, activeChatId } = req.body;
-    console.log(req.body);
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
@@ -41,12 +40,14 @@ router.post("/text", async (req, res) => {
 router.post("/code", async (req, res) => {
   try {
     const { text, activeChatId } = req.body;
-    console.log(req.body);
 
     const response = await openai.createChatCompletion({
       model: "gpt-3.5-turbo",
       messages: [
-        { role: "system", content: "You are an assistant coder who responds with only code and no explanations." }, // this represents the bot and what role they will assume
+        {
+          role: "system",
+          content: "You are an assistant coder who responds with only code and no explanations.",
+        }, // this represents the bot and what role they will assume
         { role: "user", content: text }, // the message that the user sends
       ],
     });
